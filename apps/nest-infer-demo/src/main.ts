@@ -1,8 +1,14 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { ConfigType, EnvParams, getFromLibrary } from '@app/common';
+import { PathValue } from '@nestjs/config';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
-}
-bootstrap();
+console.log(getFromLibrary());
+
+const getFromApp = () => {
+  type T1 = PathValue<ConfigType, EnvParams.foo>;
+
+  const t: T1 = '42';
+
+  return t;
+};
+
+console.log(getFromApp());
